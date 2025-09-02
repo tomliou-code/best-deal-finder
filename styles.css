@@ -1,0 +1,1039 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.items-management-section {
+    grid-column: 1 / -1;
+}
+
+.items-management {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.add-item-form {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.add-item-form input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.add-item-form input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.items-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.item-management-item {
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.item-management-item:hover {
+    border-color: #667eea;
+    background: #edf2f7;
+    transform: translateY(-2px);
+}
+
+.item-name {
+    font-weight: 600;
+    color: #2d3748;
+    flex: 1;
+}
+
+.item-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn {
+    background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+}
+
+.edit-btn:hover {
+    background: linear-gradient(135deg, #dd6b20 0%, #c05621 100%);
+}
+
+.item-actions .delete-btn {
+    background: #e53e3e;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    margin-left: 0;
+}
+
+.item-actions .delete-btn:hover {
+    background: #c53030;
+}
+
+/* 項目等級管理樣式 */
+.item-level-management {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid #e2e8f0;
+}
+
+.item-level-management h3 {
+    color: #4a5568;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.help-text {
+    color: #718096;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.add-level-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.add-level-form select {
+    padding: 8px 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    min-width: 120px;
+    transition: border-color 0.3s ease;
+}
+
+.add-level-form select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.add-level-form span {
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.level-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.level-item {
+    background: #f0fff4;
+    border: 2px solid #c6f6d5;
+    border-radius: 8px;
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.level-item:hover {
+    border-color: #9ae6b4;
+    background: #e6fffa;
+}
+
+.level-text {
+    color: #2d3748;
+    font-weight: 500;
+}
+
+/* 拖曳樣式 */
+.item-management-item[draggable="true"] {
+    cursor: move;
+}
+
+.item-management-item[draggable="true"]:hover {
+    cursor: move;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.item-management-item.dragging {
+    opacity: 0.5;
+    transform: rotate(5deg);
+}
+
+/* 多個最優方案樣式 */
+.best-deal + .best-deal {
+    margin-top: 20px;
+}
+
+.best-deal h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 響應式設計優化 */
+@media (max-width: 768px) {
+    .add-level-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .add-level-form select {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .add-level-form span {
+        text-align: center;
+        padding: 5px 0;
+    }
+    
+    .level-item {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .item-management-item {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .item-actions {
+        justify-content: center;
+    }
+}
+
+/* 相關方案樣式 */
+.related-plans-section {
+    grid-column: 1 / -1;
+}
+
+.related-plans-container {
+    min-height: auto;
+}
+
+.related-plans-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.plans-summary {
+    color: #4a5568;
+    font-weight: 600;
+    margin: 0;
+}
+
+.filter-options {
+    display: flex;
+    gap: 15px;
+}
+
+.filter-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.filter-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #667eea;
+}
+
+.related-plans-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.related-plan-item {
+    display: flex;
+    align-items: stretch;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 0;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.related-plan-item:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+}
+
+.related-plan-item.full-coverage {
+    border-color: #48bb78;
+    background: #f0fff4;
+}
+
+.related-plan-item.full-coverage:hover {
+    border-color: #38a169;
+    box-shadow: 0 8px 25px rgba(72, 187, 120, 0.15);
+}
+
+.plan-rank {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    min-width: 60px;
+    padding: 0 15px;
+}
+
+.full-coverage .plan-rank {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+}
+
+.plan-info {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.plan-name {
+    font-weight: 700;
+    color: #2d3748;
+    font-size: 1.1rem;
+}
+
+.plan-metrics {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.plan-price {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.coverage-badge {
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.coverage-badge.complete {
+    background: #c6f6d5;
+    color: #22543d;
+}
+
+.coverage-badge.partial {
+    background: #fed7d7;
+    color: #742a2a;
+}
+
+.plan-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.plan-items {
+    color: #4a5568;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.satisfied-items {
+    color: #38a169;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.plan-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.price-per-item,
+.total-items {
+    background: #edf2f7;
+    color: #4a5568;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .related-plans-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+    
+    .plans-summary {
+        text-align: center;
+    }
+    
+    .filter-options {
+        justify-content: center;
+    }
+    
+    .related-plan-item {
+        flex-direction: column;
+    }
+    
+    .plan-rank {
+        min-width: auto;
+        padding: 10px;
+        text-align: center;
+    }
+    
+    .plan-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    
+    .plan-metrics {
+        justify-content: space-between;
+    }
+    
+    .plan-stats {
+        justify-content: space-between;
+    }
+}
+
+/* 方案選擇功能樣式 */
+.plan-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 20px;
+    background: #f8fafc;
+    border-left: 3px solid #e2e8f0;
+    min-width: 150px;
+}
+
+.selection-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+.selection-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #667eea;
+}
+
+.checkbox-label {
+    user-select: none;
+}
+
+.quantity-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.quantity-input label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.quantity-field {
+    padding: 8px 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    width: 80px;
+    transition: all 0.3s ease;
+}
+
+.quantity-field:enabled {
+    border-color: #667eea;
+    background: white;
+}
+
+.quantity-field:disabled {
+    background: #f1f5f9;
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+.quantity-field:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 總計算區域樣式 */
+.total-calculation-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.calculation-summary h4 {
+    margin: 0 0 15px 0;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.selected-plans-list {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    min-height: 60px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.no-selection {
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.selected-plan-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.selected-plan-item:last-child {
+    margin-bottom: 0;
+}
+
+.selected-plan-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.selected-plan-name {
+    font-weight: 600;
+    flex: 1;
+}
+
+.selected-plan-quantity {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 10px;
+}
+
+.selected-plan-subtotal {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.total-amount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.total-label {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.total-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    transition: transform 0.2s ease;
+}
+
+.calculation-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.clear-selection-btn,
+.show-content-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.clear-selection-btn:hover,
+.show-content-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.show-content-btn {
+    background: rgba(72, 187, 120, 0.3);
+    border-color: rgba(72, 187, 120, 0.5);
+}
+
+.show-content-btn:hover {
+    background: rgba(72, 187, 120, 0.5);
+    border-color: rgba(72, 187, 120, 0.7);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .related-plan-item {
+        flex-direction: column;
+    }
+    
+    .plan-selection {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        min-width: auto;
+        border-left: none;
+        border-top: 3px solid #e2e8f0;
+    }
+    
+    .quantity-input {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .calculation-actions {
+        flex-direction: column;
+    }
+    
+    .clear-selection-btn,
+    .show-content-btn {
+        width: 100%;
+    }
+}
+
+section {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+}
+
+section h2 {
+    color: #4a5568;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 10px;
+}
+
+.plan-input, .requirement-input {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.plan-input input[type="text"], 
+.plan-input input[type="number"],
+.requirement-input input[type="text"] {
+    padding: 12px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.plan-input input:focus,
+.requirement-input input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.items-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    padding: 15px;
+    background: #f7fafc;
+    border-radius: 8px;
+    border: 2px solid #e2e8f0;
+}
+
+.item-checkboxes label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.item-checkboxes label:hover {
+    color: #667eea;
+}
+
+.item-checkboxes input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #667eea;
+}
+
+button {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.example-btn, .reset-btn, .clear-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 10px;
+}
+
+.example-btn:hover, .reset-btn:hover, .clear-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.reset-btn {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+}
+
+.reset-btn:hover {
+    box-shadow: 0 8px 25px rgba(72, 187, 120, 0.3);
+}
+
+.clear-btn {
+    background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+}
+
+.clear-btn:hover {
+    box-shadow: 0 8px 25px rgba(245, 101, 101, 0.3);
+}
+
+.find-btn {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    font-size: 1.1rem;
+    padding: 15px 30px;
+}
+
+.plans-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.plan-item {
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+.plan-item:hover {
+    border-color: #667eea;
+    background: #edf2f7;
+}
+
+.plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.plan-name {
+    font-weight: 700;
+    color: #2d3748;
+    font-size: 1.1rem;
+}
+
+.plan-price {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.plan-items {
+    color: #4a5568;
+    font-size: 0.95rem;
+}
+
+.delete-btn {
+    background: #e53e3e;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    margin-left: 10px;
+}
+
+.delete-btn:hover {
+    background: #c53030;
+}
+
+.result-section {
+    grid-column: 1 / -1;
+}
+
+.result-container {
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.no-result {
+    text-align: center;
+    color: #718096;
+    font-style: italic;
+    padding: 40px;
+    background: #f7fafc;
+    border-radius: 10px;
+    border: 2px dashed #e2e8f0;
+}
+
+.best-deal {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.best-deal h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.deal-details {
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.deal-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.deal-item:last-child {
+    border-bottom: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    padding-top: 15px;
+    border-top: 2px solid rgba(255,255,255,0.3);
+}
+
+.example-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.example-btn {
+    background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+}
+
+.clear-btn {
+    background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .item-checkboxes {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+    
+    .example-section {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .example-section button {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* 滾動條樣式 */
+.plans-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.plans-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.plans-list::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 10px;
+}
+
+.plans-list::-webkit-scrollbar-thumb:hover {
+    background: #5a67d8;
+}
