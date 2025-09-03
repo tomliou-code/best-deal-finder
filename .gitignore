@@ -1,0 +1,27 @@
+# 作業系統檔案
+.DS_Store
+Thumbs.db
+
+# 編輯器檔案
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 暫存檔案
+*.tmp
+*.temp
+
+# 日誌檔案
+*.log
+
+# 依賴項目 (如果未來加入)
+node_modules/
+npm-debug.log*
+
+# 環境變數檔案
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

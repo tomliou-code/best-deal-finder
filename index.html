@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>優惠方案比較器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍔 最優惠方案比較器 (測試版)</h1>
+            <p>輸入各種方案，找出最划算的組合！</p>
+        </header>
+
+        <div class="main-content">
+            <!-- 項目管理區域 -->
+            <section class="items-management-section">
+                <h2>項目管理</h2>
+                <div class="items-management">
+                    <div class="add-item-form">
+                        <input type="text" id="newItemName" placeholder="新項目名稱">
+                        <button id="addItemBtn">新增項目</button>
+                    </div>
+                    <div class="items-list" id="itemsList"></div>
+                </div>
+                
+            </section>
+
+            <!-- 方案輸入區域 -->
+            <section class="input-section">
+                <h2>添加方案</h2>
+                <div class="plan-input">
+                    <input type="text" id="planName" placeholder="方案名稱 (例: 方案A)">
+                    <div class="items-container">
+                        <div class="item-checkboxes" id="planItemCheckboxes">
+                            <!-- 動態生成的項目選項 -->
+                        </div>
+                        <input type="text" id="customItems" placeholder="或輸入自定義項目 (用逗號分隔)">
+                    </div>
+                    <input type="number" id="planPrice" placeholder="價格 (元)" min="0">
+                    <!-- <button onclick="addPlan()">添加方案</button> -->
+                    <button id="addPlanBtn" >添加方案</button>
+                </div>
+            </section>
+
+            <!-- 現有方案顯示 -->
+            <section class="plans-section">
+                <h2>現有方案</h2>
+                <div id="plansList" class="plans-list"></div>
+            </section>
+
+            <!-- 需求輸入區域 -->
+            <section class="requirement-section">
+                <h2>我想要的項目</h2>
+                <div class="requirement-input">
+                    <div class="item-checkboxes" id="requirementItemCheckboxes">
+                        <!-- 動態生成的項目選項 -->
+                    </div>
+                    <input type="text" id="customRequirement" placeholder="或輸入自定義項目 (用逗號分隔)" onchange="updateRequirement()">
+                    <!--<button onclick="findBestDeal()" class="find-btn">🔍 找出最優方案</button> -->
+                </div>
+            </section>
+
+            <!-- 相關方案顯示區域 -->
+            <section class="related-plans-section">
+                <h2>包含所需項目的方案</h2>
+                <div id="relatedPlansContainer" class="related-plans-container">
+                    <p class="no-result">請選擇需要的項目以查看相關方案</p>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- 總金額計算區域 -->
+        <!--<section class="total-calculation-section">
+            <div class="calculation-summary">
+                <h4>🧮 總金額計算</h4>
+                <div class="selected-plans-list" id="selectedPlansList">
+                    <p class="no-selection">尚未選擇任何方案</p>
+                </div>
+                <div class="total-amount">
+                    <span class="total-label">總計：</span>
+                    <span class="total-value" id="totalAmount">$0</span>
+                </div>
+                <div class="calculation-actions">
+                    <button onclick="clearAllSelections()" class="clear-selection-btn">清除選擇</button>
+                </div>
+            </div>
+        </section>-->
+
+        <!-- 預設範例按鈕 -->
+        <div class="example-section">
+            <!-- <button onclick="loadExampleData()" class="example-btn">載入範例數據</button> -->
+            <button id="resetToDefaultBtn" class="reset-btn">載入預設數據</button>
+            <button id="clearAllDataBtn"  class="clear-btn">清除所有數據</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
